@@ -2,9 +2,9 @@
 
 /// Things from [#73040](https://github.com/rust-lang/rust/pull/73040)
 pub trait OptionExt {
-	type Item;
+    type Item;
 
-	/// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`] to
+    /// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`] to
     /// [`Err(v)`] and [`None`] to [`Ok(ok)`].
     ///
     /// Arguments passed to `err_or` are eagerly evaluated; if you are passing the
@@ -49,13 +49,13 @@ pub trait OptionExt {
     /// let x: Option<&str> = None;
     /// assert_eq!(x.err_or_else(|| 0), Ok(0));
     /// ```
-    fn err_or_else<O, F>(self, ok: F) -> Result<O, Self::Item> 
+    fn err_or_else<O, F>(self, ok: F) -> Result<O, Self::Item>
     where
         F: FnOnce() -> O;
 }
 
 impl<T> OptionExt for Option<T> {
-   	type Item = T;
+    type Item = T;
 
     #[inline]
     fn err_or<O>(self, ok: O) -> Result<O, Self::Item> {
@@ -66,7 +66,7 @@ impl<T> OptionExt for Option<T> {
     }
 
     #[inline]
-    fn err_or_else<O, F>(self, ok: F) -> Result<O, Self::Item> 
+    fn err_or_else<O, F>(self, ok: F) -> Result<O, Self::Item>
     where
         F: FnOnce() -> O,
     {
@@ -74,5 +74,5 @@ impl<T> OptionExt for Option<T> {
             Some(v) => Err(v),
             None => Ok(ok()),
         }
-    }	
+    }
 }
