@@ -13,5 +13,5 @@ Rust lib which allows you to convert `Option<E>` into `Result<_, E>`.
 err_or = "0.1"
 ```
 
-_Compiler support: requires rustc 1.31+ (the first release with stable `2018` edition)_   
+_Compiler support: requires rustc 1.7+ (1.0+ if compiled with `sfeatures = ["std"]`)_
 
