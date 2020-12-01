@@ -19,15 +19,15 @@ jobs:
           - nightly
           - 1.0.0
 
-      include:
-        - rust: stable
-          features: ""
-        - rust: beta
-          features: ""
-        - rust: nightly
-          features: ""
-        - rust: 1.0.0
-          features: '--features "std"'
+        include:
+          - rust: stable
+            features: ""
+          - rust: beta
+            features: ""
+          - rust: nightly
+            features: ""
+          - rust: 1.0.0
+            features: '--features "std"'
 
 
     steps:
