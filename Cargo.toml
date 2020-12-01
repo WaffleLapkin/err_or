@@ -1,9 +1,25 @@
 [package]
 name = "err_or"
+description = "Small lib that helps converting `Option<E>` into `Result<_, E>`"
 version = "0.1.0"
 authors = ["Waffle <waffle.lapkin@gmail.com>"]
 edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/WaffleLapkin/err_or/"
+homepage = "https://github.com/WaffleLapkin/err_or/"
+documentation = "https://docs.rs/err_or/"
+readme = "README.md"
+
+keywords = ["no_std", "error", "err_or"]
+categories = ["no-std", "rust-patterns"]
+
+exclude = [
+    ".github/*",
+    "netlify.toml",
+]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+# none
