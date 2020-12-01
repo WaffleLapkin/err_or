@@ -8,7 +8,7 @@
 //!
 //! [`err_or`]: OptionExt::err_or
 //! [`err_or_else`]: OptionExt::err_or_else
-#![cfg_attr(not(feature("std")), no_std)]
+#![cfg_attr(not(feature = "std"), no_std)]
 #![forbid(unsafe_code)]
 #![deny(missing_docs, broken_intra_doc_links)]
 
