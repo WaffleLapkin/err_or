@@ -1,15 +1,28 @@
-#![no_std]
+//! This crate adds [`err_or`] and [`err_or_else`] methods to the [`Option`]
+//! type which allow converting `Option<E>` into `Result<_, E>`.
+//!
+//! Those methods were proposed in [`rust-lang/rust#73040`](https://github.com/rust-lang/rust/pull/73040)
+//! PR, but it was closed.
+//!
+//! This crate is `#![no_std]` compatible.
+//!
+//! [`err_or`]: OptionExt::err_or
+//! [`err_or_else`]: OptionExt::err_or_else
+#![cfg_attr(not(feature = "std"), no_std)]
+#![forbid(unsafe_code)]
+#![deny(missing_docs, broken_intra_doc_links)]
 
-/// Things from [#73040](https://github.com/rust-lang/rust/pull/73040)
+/// Extension trait for [`Option`].
 pub trait OptionExt {
+    /// Value type, i.e. `T` for `Option<T>`.
     type Item;
 
-    /// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`] to
-    /// [`Err(v)`] and [`None`] to [`Ok(ok)`].
+    /// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`]
+    /// to [`Err(v)`] and [`None`] to [`Ok(ok)`].
     ///
-    /// Arguments passed to `err_or` are eagerly evaluated; if you are passing the
-    /// result of a function call, it is recommended to use [`err_or_else`], which is
-    /// lazily evaluated.
+    /// Arguments passed to `err_or` are eagerly evaluated; if you are passing
+    /// the result of a function call, it is recommended to use
+    /// [`err_or_else`], which is lazily evaluated.
     ///
     /// [`Result<O, T>`]: core::result::Result
     /// [`Err(v)`]: core::result::Result#variant.Err
@@ -22,6 +35,7 @@ pub trait OptionExt {
     ///
     /// ```
     /// use err_or::OptionExt;
+    ///
     /// let x = Some("foo");
     /// assert_eq!(x.err_or(0), Err("foo"));
     ///
@@ -30,8 +44,8 @@ pub trait OptionExt {
     /// ```
     fn err_or<O>(self, ok: O) -> Result<O, Self::Item>;
 
-    /// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`] to
-    /// [`Err(v)`] and [`None`] to [`Ok(ok())`].
+    /// Transforms the `Option<T>` into a [`Result<O, T>`], mapping [`Some(v)`]
+    /// to [`Err(v)`] and [`None`] to [`Ok(ok())`].
     ///
     /// [`Result<O, T>`]: core::result::Result
     /// [`Err(v)`]: core::result::Result#variant.Err
@@ -43,6 +57,7 @@ pub trait OptionExt {
     ///
     /// ```
     /// use err_or::OptionExt;
+    ///
     /// let x = Some("foo");
     /// assert_eq!(x.err_or_else(|| 0), Err("foo"));
     ///
